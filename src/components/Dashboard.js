@@ -29,7 +29,18 @@ const data = [
 ];
 
 class Dashboard extends Component {
+  // INITIAL STATE
   state = { loading: false, focused: null };
+
+  // SELECTPANEL INSTANCE METHOD
+  selectPanel(id) {
+    // this.setState is an instance method provided by the React.Component superclass.
+    this.setState({
+      focused: id,
+    });
+  }
+
+  // RENDER
   /*
    * The only function that a component needs to declare is the render function.
    * This render function is equivalent to the body of the components that we declare as functions.
@@ -43,7 +54,7 @@ class Dashboard extends Component {
       return <Loading />;
     }
 
-    // When the value is null it means we are in the unfocused four-panel view.
+    // When focused is null it means we are in the unfocused four-panel view.
     // When we are in focused mode, we don't want to render four panels; we want to render one.
     const panels = data
       .filter(
@@ -56,6 +67,7 @@ class Dashboard extends Component {
           id={panel.id}
           label={panel.label}
           value={panel.value}
+          onSelect={this.selectPanel}
         />
       ));
 
