@@ -35,9 +35,9 @@ class Dashboard extends Component {
   // SELECTPANEL INSTANCE METHOD
   selectPanel(id) {
     // this.setState is an instance method provided by the React.Component superclass.
-    this.setState({
-      focused: id,
-    });
+    this.setState((previousState) => ({
+      focused: previousState.focused !== null ? null : id, // set the value of focused back to null if the value of focused is currently set to a panel.
+    }));
   }
 
   // RENDER
