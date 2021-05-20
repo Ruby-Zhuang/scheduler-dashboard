@@ -32,18 +32,13 @@ class Dashboard extends Component {
   // INITIAL STATE
   state = { loading: false, focused: null };
 
-  // CLASS PROPERTY WITH ARROW FUNCTION
-  /*
-   * It must be an arrow function because of how they handle this context.
-   * Arrow functions are designed to alter this behaviour in a specific way.
-   * The binding is not dynamic; it is is based on where the function is declared.
-   */
-  selectPanel = (id) => {
+  // SELECTPANEL INSTANCE METHOD
+  selectPanel(id) {
     // this.setState is an instance method provided by the React.Component superclass.
     this.setState({
       focused: id,
     });
-  };
+  }
 
   // RENDER
   /*
@@ -69,10 +64,9 @@ class Dashboard extends Component {
       .map((panel) => (
         <Panel
           key={panel.id}
-          id={panel.id}
           label={panel.label}
           value={panel.value}
-          onSelect={this.selectPanel}
+          onSelect={(event) => this.selectPanel(panel.id)}
         />
       ));
 
