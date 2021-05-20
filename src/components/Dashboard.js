@@ -32,6 +32,20 @@ class Dashboard extends Component {
   // INITIAL STATE
   state = { loading: false, focused: null };
 
+  componentDidMount() {
+    const focused = JSON.parse(localStorage.getItem('focused'));
+
+    if (focused) {
+      this.setState({ focused });
+    }
+  }
+
+  componentDidUpdate(previousProps, previousState) {
+    if (previousState.focused !== this.state.focused) {
+      localStorage.setItem('focused', JSON.stringify(this.state.focused));
+    }
+  }
+
   // SELECTPANEL INSTANCE METHOD
   selectPanel(id) {
     // this.setState is an instance method provided by the React.Component superclass.
